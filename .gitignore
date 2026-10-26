@@ -1,0 +1,11 @@
+.build/
+.swiftpm/
+dist/
+backups/
+.DS_Store
+__pycache__/
+*.pyc
+.env
+.env.*
+
+docs/launch-copy.md
