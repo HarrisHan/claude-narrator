@@ -15,7 +15,7 @@
 
 ## 下载试用
 
-1. 在 [Releases](https://github.com/HarrisHan/claude-narrator/releases/tag/v0.1.0) 下载 `Claude-Narrator-macOS-arm64.zip` 并解压。
+1. 在 [Releases](https://github.com/HarrisHan/claude-narrator/releases/tag/v0.1.1) 下载 `Claude-Narrator-macOS-arm64.zip` 并解压。
 2. 将 App 移入“应用程序”后打开。早期版本仅做临时签名、尚未经过 Apple 公证；如被系统拦截，仅在信任此版本的前提下，到“系统设置 → 隐私与安全性”选择“仍要打开”。
 3. 在终端运行 `python3 /解压目录/install-hook.py`（替换为实际路径），然后重启 Claude Code。
 4. 让 Claude 完成一次回答，即可听到系统语音；自然音色按下方步骤另行安装。

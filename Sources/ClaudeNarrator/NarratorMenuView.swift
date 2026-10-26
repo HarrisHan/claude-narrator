@@ -105,6 +105,9 @@ struct NarratorMenuView: View {
             .foregroundStyle(.secondary)
         }
         Slider(value: $speech.ratePercent, in: 70...150, step: 5)
+        Text("自然语音即时变速；系统语音调速后请点重播")
+          .font(.caption)
+          .foregroundStyle(.secondary)
       }
 
       Divider()

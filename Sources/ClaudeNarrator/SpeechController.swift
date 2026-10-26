@@ -38,7 +38,10 @@ final class SpeechController: NSObject, ObservableObject, AVSpeechSynthesizerDel
     didSet { UserDefaults.standard.set(isMuted, forKey: Keys.muted) }
   }
   @Published var ratePercent: Double {
-    didSet { UserDefaults.standard.set(ratePercent, forKey: Keys.rate) }
+    didSet {
+      UserDefaults.standard.set(ratePercent, forKey: Keys.rate)
+      audioPlayer?.rate = Float(ratePercent / 100)
+    }
   }
   @Published var useNaturalVoice: Bool {
     didSet { UserDefaults.standard.set(useNaturalVoice, forKey: Keys.useNaturalVoice) }
@@ -48,7 +51,7 @@ final class SpeechController: NSObject, ObservableObject, AVSpeechSynthesizerDel
   }
 
   private let systemSynthesizer = AVSpeechSynthesizer()
-  private var audioPlayer: AVAudioPlayer?
+  private(set) var audioPlayer: AVAudioPlayer?
   private var synthesisProcess: Process?
   private var synthesisToken = UUID()
   private var activeEngine: ActiveEngine?
@@ -189,7 +192,8 @@ final class SpeechController: NSObject, ObservableObject, AVSpeechSynthesizerDel
     process.executableURL = executableURL
     process.arguments = [
       "--voice", neuralVoiceID,
-      "--rate", neuralRateArgument,
+      // Cache neutral-speed audio; the player applies the current speed live.
+      "--rate", "+0%",
       "--text", text,
       "--write-media", outputURL.path,
     ]
@@ -246,10 +250,12 @@ final class SpeechController: NSObject, ObservableObject, AVSpeechSynthesizerDel
     playNeuralAudio(at: outputURL, fallbackText: fallbackText)
   }
 
-  private func playNeuralAudio(at url: URL, fallbackText: String) {
+  func playNeuralAudio(at url: URL, fallbackText: String) {
     do {
       let player = try AVAudioPlayer(contentsOf: url)
       player.delegate = self
+      player.enableRate = true
+      player.rate = Float(ratePercent / 100)
       player.prepareToPlay()
       audioPlayer = player
       activeEngine = .neural
@@ -291,11 +297,6 @@ final class SpeechController: NSObject, ObservableObject, AVSpeechSynthesizerDel
     if setIdle {
       playbackState = .idle
     }
-  }
-
-  private var neuralRateArgument: String {
-    let difference = Int(ratePercent.rounded()) - 100
-    return String(format: "%+d%%", difference)
   }
 
   private var edgeTTSExecutableURL: URL? {

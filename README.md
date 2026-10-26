@@ -6,7 +6,7 @@
 <p align="center"><strong>Let Claude finish. Listen to what changed.</strong></p>
 <p align="center">A native macOS companion that gives Claude Code a voice.</p>
 
-[Download for Apple Silicon](https://github.com/HarrisHan/claude-narrator/releases/tag/v0.1.0) · [简体中文](docs/README.zh-CN.md) · [Report a bug](https://github.com/HarrisHan/claude-narrator/issues)
+[Download for Apple Silicon](https://github.com/HarrisHan/claude-narrator/releases/tag/v0.1.1) · [简体中文](docs/README.zh-CN.md) · [Report a bug](https://github.com/HarrisHan/claude-narrator/issues)
 
 ![macOS](https://img.shields.io/badge/macOS-15%2B-black) ![License](https://img.shields.io/badge/license-MIT-blue)
 
@@ -24,7 +24,7 @@ The default mode preserves the reply's prose and order instead of summarizing it
 
 ### Download and try
 
-1. Download `Claude-Narrator-macOS-arm64.zip` from [Releases](https://github.com/HarrisHan/claude-narrator/releases/tag/v0.1.0) and unzip it.
+1. Download `Claude-Narrator-macOS-arm64.zip` from [Releases](https://github.com/HarrisHan/claude-narrator/releases/tag/v0.1.1) and unzip it.
 2. Move `Claude Narrator.app` to Applications and open it. The early-access build is ad-hoc signed, not Apple-notarized. If macOS blocks it, review it in **System Settings → Privacy & Security → Open Anyway** only if you trust this release.
 3. In Terminal, run `python3 /path/to/unzipped-folder/install-hook.py` (replace the path). Restart Claude Code to load the hook.
 4. Complete a Claude Code turn and listen. System speech works without additional Python packages; install the optional natural voice component below for the four neural voices.
